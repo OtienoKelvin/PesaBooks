@@ -116,11 +116,13 @@ exports.getDashboardStats = async (req, res) => {
             // E. RECENT ACTIVITY
             db.promise().query(
                 `
-                SELECT 
-                id, total, status, created_at
-                FROM invoices
-                WHERE business_id = ?
-                ORDER BY created_at DESC
+                SELECT
+                CONCAT(c.first_name, ' ', c.last_name) AS client_name, 
+                invoice_number, total, status, created_at
+                FROM invoices i
+                JOIN clients c ON i.client_id = c.id
+                WHERE i.business_id = ?
+                ORDER BY i.created_at DESC
                 LIMIT 5
                 `,
                 [business_id]

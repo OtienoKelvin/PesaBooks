@@ -16,6 +16,7 @@ const sidebarItems = [
     label: "Dashboard",
     icon: LayoutDashboard,
     href: "/",
+    isActive: true
   },
   {
     label: "Transactions",
@@ -42,7 +43,7 @@ const user = {
 
 export default function AppSidebar({...props}) {
   return (
-    <Sidebar {...props}>
+    <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
         <BusinessSwitcher versions={versions} defaultVersion={versions[0]}/>
       </SidebarHeader>    
